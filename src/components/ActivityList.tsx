@@ -2,14 +2,13 @@ import { categories } from "../data/categorias"
 import { Activity } from "../types"
 import { useMemo } from "react"
 import { PencilSquareIcon, XCircleIcon } from '@heroicons/react/24/outline'
-import { ActivityActions } from "../reducers/activityReducer"
+import { useActivity } from "../hooks/useActivity"
 
-type ActivityListProps = {
-  activities: Activity[],
-  dispatch: React.Dispatch<ActivityActions>
-}
 
-const ActivityList = ({activities , dispatch} : ActivityListProps) => {
+const ActivityList = () => {
+
+  const { state, dispatch } = useActivity()
+  const { activities } = state
 
   const categoryName = useMemo(()=> (category: Activity['category']) => categories.map( cat => cat.id === category ? cat.name : ''),
   [activities])
